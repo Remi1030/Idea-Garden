@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Idea Garden</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="app-shell">
+    <canvas id="sketch-layer" aria-label="Freehand sketching surface"></canvas>
+
+    <header class="topbar">
+      <div class="brand-lockup">
+        <div class="brand-mark" aria-hidden="true">
+          <svg class="brand-logo" viewBox="0 0 48 48" focusable="false">
+            <defs>
+              <clipPath id="logo-inner-clip">
+                <circle cx="24" cy="24" r="18.2"></circle>
+              </clipPath>
+            </defs>
+            <circle class="logo-ring" cx="24" cy="24" r="20"></circle>
+            <g clip-path="url(#logo-inner-clip)">
+              <path class="logo-ring-brush" d="M10 34C6 25 10 14 18 8M30 5c8 3 13 11 13 19M42 29c-2 8-9 13-17 14"></path>
+              <path class="logo-streak" d="M8 36c8-2 18-6 29-14"></path>
+              <path class="logo-streak-light" d="M11 35c7-2 15-5 24-11"></path>
+              <path class="logo-stem" d="M24 22c0 4 1 8-1 13"></path>
+              <path class="logo-leaf" d="M23 30c-4-3-7-3-9-1 3 4 6 4 9 2Z"></path>
+              <path class="logo-leaf-light" d="M23 30c-3-2-5-2-7-1"></path>
+              <path class="logo-tulip" d="M17 20c-.4-3 .4-6.2 2.3-8.7 1.6 2 2.8 3.9 4.7 5.3 1.5-2.5 2.8-4.5 4.6-5.5 2 2.8 2.3 6.1 1.5 8.9-1.5 1.9-3.8 2.7-6.2 2.5-2.8.1-5.2-.8-6.9-2.5Z"></path>
+              <path class="logo-petal-light" d="M20 12.5c.2 2.3 1 4 2.2 5.4M28 12c-.1 2-.7 3.7-1.7 5"></path>
+            </g>
+          </svg>
+        </div>
+        <div>
+          <h1>Idea Garden</h1>
+        </div>
+      </div>
+    </header>
+
+    <nav class="board-tabs" aria-label="Brainstorm boards">
+      <div id="board-tab-list" class="board-tab-list"></div>
+      <button id="add-board" class="add-board" aria-label="Add a new board" title="Add a new board">+</button>
+    </nav>
+
+    <aside class="tool-dock" aria-label="Whiteboard tools">
+      <div class="dock-cap"><span></span><span></span><span></span></div>
+      <div class="tool-group utility-tools">
+        <button class="tool-button add-note-tool" id="add-note" aria-label="Add a new thought" title="Add a new thought">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4.5h14v15H5z"/><path d="M8.5 8.5h7M8.5 12h5M8.5 15.5h3"/><path d="M17.5 16.5v5M15 19h5"/></svg>
+        </button>
+        <button class="tool-button" id="undo" aria-label="Undo last stroke" title="Undo last stroke">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 7 4 12l5 5"/><path d="M5 12h8a6 6 0 0 1 6 6"/></svg>
+        </button>
+        <button class="tool-button" id="redo" aria-label="Redo last stroke" title="Redo last stroke">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 7 5 5-5 5"/><path d="M19 12h-8a6 6 0 0 0-6 6"/></svg>
+        </button>
+      </div>
+      <span class="tool-rule"></span>
+      <div class="tool-group drawing-tools">
+        <button class="tool-button active" data-tool="pen" aria-label="Pen" title="Pen">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m4.5 19.5 3.7-.8L18.8 8.1a2.2 2.2 0 0 0-3.1-3.1L5.1 15.6l-.6 3.9Z"/><path d="m13.9 6.5 3.6 3.6M4.5 19.5l3.8-.7"/></svg>
+        </button>
+        <button class="tool-button" data-tool="pencil" aria-label="Pencil" title="Pencil">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m4.2 15.7-.7 4.8 4.8-.7L19.5 8.6a2.7 2.7 0 0 0-3.8-3.8L4.2 15.7Z"/><path d="m13.9 7 3.1 3.1M3.7 20.3l4-4"/></svg>
+        </button>
+        <button class="tool-button" data-tool="marker" aria-label="Marker" title="Marker">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 16.8 16.7 6.1a2.7 2.7 0 0 1 3.8 3.8L9.8 20.6 6 16.8Z"/><path d="m5.2 17.7-1 2.9 2.9-1M15 7.8l3.3 3.3"/></svg>
+        </button>
+        <button class="tool-button" data-tool="highlighter" aria-label="Highlighter" title="Highlighter">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m4.5 15 8.9-8.9a2.4 2.4 0 0 1 3.4 0l1.1 1.1a2.4 2.4 0 0 1 0 3.4L9 19.5H4.5V15Z"/><path d="M11.3 8.2 15.8 12.7M4.5 20h14"/></svg>
+        </button>
+        <button class="tool-button" data-tool="eraser" aria-label="Eraser" title="Eraser">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m4.3 14.4 8.9-8.9a2.6 2.6 0 0 1 3.7 0l2.2 2.2a2.6 2.6 0 0 1 0 3.7l-7.6 7.6H6.1l-1.8-1.8a2 2 0 0 1 0-2.8Z"/><path d="m12 19 4-4"/></svg>
+        </button>
+      </div>
+      <span class="tool-rule"></span>
+      <div class="color-picker" aria-label="Ink color">
+        <button class="color-swatch ink-dark active" data-color="#26312d" aria-label="Ink green"></button>
+        <button class="color-swatch ink-rose" data-color="#d9897e" aria-label="Coral ink"></button>
+        <button class="color-swatch ink-yellow" data-color="#e6b968" aria-label="Golden ink"></button>
+      </div>
+      <button class="tool-button trash-tool" id="remove-stroke" aria-label="Remove last stroke" title="Remove last stroke">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M9 7V4h6v3M7 7l1 13h8l1-13M10 11v5M14 11v5"/></svg>
+      </button>
+    </aside>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>
